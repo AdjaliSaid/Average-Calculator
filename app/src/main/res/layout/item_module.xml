@@ -1,0 +1,90 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:paddingLeft="5dp"
+    android:layout_marginBottom="5dp"
+    android:gravity="center_vertical"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:id="@+id/moduleName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Module"
+        android:textStyle="bold"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/moduleCoef"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:text="3"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/moduleCred"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="5"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
+    <!-- TP EditText -->
+    <EditText
+        android:id="@+id/tpEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="TP"
+        android:inputType="numberDecimal"
+        android:background="@drawable/bottom_border_edittext"
+        android:padding="2dp"
+        android:layout_marginLeft="5px"
+        android:layout_marginRight="5px"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        />
+
+    <EditText
+        android:id="@+id/tdEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="TD"
+        android:inputType="numberDecimal"
+        android:background="@drawable/bottom_border_edittext"
+        android:padding="2dp"
+        android:layout_marginLeft="5px"
+        android:layout_marginRight="5px"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/examEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.3"
+        android:hint="EXAM"
+        android:inputType="numberDecimal"
+        android:background="@drawable/bottom_border_edittext"
+        android:padding="3dp"
+        android:layout_marginLeft="5px"
+        android:layout_marginRight="5px"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/moduleMoy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="0.00"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
+</LinearLayout>
