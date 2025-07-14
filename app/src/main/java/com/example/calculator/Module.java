@@ -8,7 +8,7 @@ public class Module {
     private float exam;
     private float Average;
 
-    Module() {
+    public Module() {
         tp=-1;
         td=-1;
         exam=-1;

@@ -1,10 +1,10 @@
 package com.example.calculator;
 import android.graphics.Color;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,67 +16,90 @@ public class ModuleAdapter extends RecyclerView.Adapter<ModuleAdapter.ViewHolder
     ModuleAdapter(List<Module> moduleList) {
         this.moduleList=moduleList;
     }
-    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View viewItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_module,parent,false);
         return new ViewHolder(viewItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int pos) {
 
-        holder.moduleName.setText(moduleList.get(position).getName());
-        holder.moduleCoef.setText(moduleList.get(position).getCoef()+"");
-        holder.moduleCred.setText(moduleList.get(position).getCred()+"");
+        holder.moduleName.setText(moduleList.get(pos).getName());
+        holder.moduleCoef.setText(moduleList.get(pos).getCoef()+"");
+        holder.moduleCred.setText(moduleList.get(pos).getCred()+"");
         holder.tp.setHintTextColor(Color.RED);
         holder.td.setHintTextColor(Color.RED);
         holder.exam.setHintTextColor(Color.RED);
 
-        holder.tp.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                float text =Float.parseFloat(holder.tp.getText().toString());
-                if(text<=20 && text>=0) {
-                    moduleList.get(position).setTp(text);
-                    if(!isTextViewEmpty(holder.exam) && !isTextViewEmpty(holder.td) && !isTextViewEmpty(holder.tp)) {
-                        float a=(moduleList.get(position).getTd()+moduleList.get(position).getTp()/2) + moduleList.get(position).getExam() / 2;
-                        moduleList.get(position).setAverage(a);
-                        holder.moduleMoy.setText(a+"");
+        holder.tp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int position = holder.getAbsoluteAdapterPosition();
+                if(!isTextViewEmpty(holder.tp)) {
+                    float text =Float.parseFloat(holder.tp.getText().toString());
+                    if(text<=20 && text>=0) {
+                        moduleList.get(position).setTp(text);
+                        if (!isTextViewEmpty(holder.exam) && !isTextViewEmpty(holder.td) && !isTextViewEmpty(holder.tp)) {
+                            float a = (moduleList.get(position).getTd() + moduleList.get(position).getTp() / 2) + moduleList.get(position).getExam() / 2;
+                            moduleList.get(position).setAverage(a);
+                            holder.moduleMoy.setText(a + "");
+                        }
+                    }else {
+                        holder.tp.setText("");
                     }
-                }else {
-                    holder.tp.setText("");
                 }
             }
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
-        holder.td.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                float text =Float.parseFloat(holder.td.getText().toString());
-                if(text<=20 && text>=0) {
-                    moduleList.get(position).setTd(text);
-                    if(!isTextViewEmpty(holder.exam) && !isTextViewEmpty(holder.td) && !isTextViewEmpty(holder.tp)) {
-                        float a=(moduleList.get(position).getTd()+moduleList.get(position).getTp()/2) + moduleList.get(position).getExam() / 2;
-                        moduleList.get(position).setAverage(a);
-                        holder.moduleMoy.setText(a+"");
+        holder.td.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int position = holder.getAbsoluteAdapterPosition();
+                if (!holder.td.getText().toString().isEmpty()) {
+                    float text =Float.parseFloat(holder.td.getText().toString());
+                    if(text<=20 && text>=0) {
+                        moduleList.get(position).setTd(text);
+                        if(!isTextViewEmpty(holder.exam) && !isTextViewEmpty(holder.td) && !isTextViewEmpty(holder.tp)) {
+                            float a=(moduleList.get(position).getTd()+moduleList.get(position).getTp()/2) + moduleList.get(position).getExam() / 2;
+                            moduleList.get(position).setAverage(a);
+                            holder.moduleMoy.setText(a+"");
+                        }
+                    }else {
+                        holder.td.setText("");
                     }
-                }else {
-                    holder.td.setText("");
                 }
             }
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
-        holder.exam.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                float text =Float.parseFloat(holder.exam.getText().toString());
-                if(text<=20 && text>=0) {
-                    moduleList.get(position).setExam(text);
-                    if(!isTextViewEmpty(holder.exam) && !isTextViewEmpty(holder.td) && !isTextViewEmpty(holder.tp)) {
-                        float a=(moduleList.get(position).getTd()+moduleList.get(position).getTp()/2) + moduleList.get(position).getExam() / 2;
-                        moduleList.get(position).setAverage(a);
-                        holder.moduleMoy.setText(a+"");
+        holder.exam.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int position = holder.getAbsoluteAdapterPosition();
+                if (!holder.exam.getText().toString().isEmpty()) {
+                    float text =Float.parseFloat(holder.exam.getText().toString());
+                    if(text<=20 && text>=0) {
+                        moduleList.get(position).setExam(text);
+                        if(!isTextViewEmpty(holder.exam) && !isTextViewEmpty(holder.td) && !isTextViewEmpty(holder.tp)) {
+                            float a=(moduleList.get(position).getTd()+moduleList.get(position).getTp()/2) + moduleList.get(position).getExam() / 2;
+                            moduleList.get(position).setAverage(a);
+                            holder.moduleMoy.setText(a+"");
+                        }
+                    }else {
+                        holder.exam.setText("");
                     }
-                }else {
-                    holder.exam.setText("");
                 }
             }
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
     }
 

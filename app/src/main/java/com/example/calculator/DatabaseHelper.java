@@ -12,13 +12,7 @@ import java.util.*;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "User.db";
-    private static final int DATABASE_VERSION = 2; // Bumped to force onUpgrade
-
-    // User table
-    private static final String TABLE_USERS = "users";
-    private static final String COL_ID = "id";
-    private static final String COL_EMAIL = "email";
-    private static final String COL_PASSWORD = "password";
+    private static final int DATABASE_VERSION = 3;
 
     // Module table
     public static final String MODULE_ID = "module_id";
@@ -32,13 +26,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create users table
-        String createUserTable = "CREATE TABLE " + TABLE_USERS + " (" +
-                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL_EMAIL + " TEXT UNIQUE, " +
-                COL_PASSWORD + " TEXT)";
-        db.execSQL(createUserTable);
-
         String createModuleTable = "CREATE TABLE modules (" +
                 MODULE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_NAME + " TEXT, " +
@@ -49,56 +36,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS modules");
         onCreate(db);
     }
-
-    // User methods
-    public boolean insertUser(String email, String password) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COL_EMAIL, email);
-        values.put(COL_PASSWORD, password);
-        long result = db.insert(TABLE_USERS, null, values);
-        return result != -1;
-    }
-
-    public boolean checkUser(String email, String password) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_USERS +
-                " WHERE " + COL_EMAIL + "=? AND " + COL_PASSWORD + "=?", new String[]{email, password});
-        boolean exists = cursor.getCount() > 0;
-        cursor.close();
-        return exists;
-    }
-
-    public boolean userExists(String email) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_USERS + " WHERE " + COL_EMAIL + "=?", new String[]{email});
-        boolean exists = cursor.getCount() > 0;
-        cursor.close();
-        return exists;
-    }
-
-    public void displayAllUsers() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM users", null);
-
-        if (cursor.getCount() == 0) {
-            Log.d("DB_USERS", "No users found.");
-        } else {
-            while (cursor.moveToNext()) {
-                int id = cursor.getInt(0);
-                String email = cursor.getString(1);
-                String password = cursor.getString(2);
-                Log.d("DB_USERS", "ID: " + id + ", Email: " + email + ", Password: " + password);
-            }
-        }
-
-        cursor.close();
-    }
-
     // Module methods
     public void insertModule(Module module) {
         SQLiteDatabase db = this.getWritableDatabase();

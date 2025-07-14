@@ -3,7 +3,6 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:paddingLeft="5dp"
     android:layout_marginBottom="5dp"
     android:gravity="center_vertical"
     android:background="#F5F5F5">
@@ -15,7 +14,8 @@
         android:layout_weight="2"
         android:text="Module"
         android:textStyle="bold"
-        android:textSize="15sp" />
+        android:textSize="12sp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/moduleCoef"
@@ -24,7 +24,8 @@
         android:layout_weight="0.3"
         android:text="3"
         android:textAlignment="center"
-        android:textSize="20sp"/>
+        android:textSize="15sp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/moduleCred"
@@ -33,7 +34,8 @@
         android:layout_weight="1"
         android:text="5"
         android:textAlignment="center"
-        android:textSize="20sp"/>
+        android:textSize="15sp"
+        android:textColor="@color/black"/>
 
     <!-- TP EditText -->
     <EditText
@@ -44,12 +46,9 @@
         android:hint="TP"
         android:inputType="numberDecimal"
         android:background="@drawable/bottom_border_edittext"
-        android:padding="2dp"
-        android:layout_marginLeft="5px"
-        android:layout_marginRight="5px"
         android:textAlignment="center"
-        android:textSize="20sp"
-        />
+        android:textSize="15sp"
+        android:textColor="@color/black"/>
 
     <EditText
         android:id="@+id/tdEditText"
@@ -59,11 +58,9 @@
         android:hint="TD"
         android:inputType="numberDecimal"
         android:background="@drawable/bottom_border_edittext"
-        android:padding="2dp"
-        android:layout_marginLeft="5px"
-        android:layout_marginRight="5px"
         android:textAlignment="center"
-        android:textSize="20sp"/>
+        android:textSize="15sp"
+        android:textColor="@color/black"/>
 
     <EditText
         android:id="@+id/examEditText"
@@ -73,11 +70,9 @@
         android:hint="EXAM"
         android:inputType="numberDecimal"
         android:background="@drawable/bottom_border_edittext"
-        android:padding="3dp"
-        android:layout_marginLeft="5px"
-        android:layout_marginRight="5px"
         android:textAlignment="center"
-        android:textSize="20sp"/>
+        android:textSize="15sp"
+        android:textColor="@color/black"/>
     <TextView
         android:id="@+id/moduleMoy"
         android:layout_width="0dp"
@@ -85,6 +80,7 @@
         android:layout_weight="1"
         android:text="0.00"
         android:textAlignment="center"
-        android:textSize="20sp"/>
+        android:textSize="15sp"
+        android:textColor="@color/black"/>
 
 </LinearLayout>
